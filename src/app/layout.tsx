@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Poppins } from "next/font/google";
+import { Sora } from "next/font/google";
+// @ts-expect-error: allow side-effect css import without type declarations
 import "./globals.css";
 import "@ant-design/v5-patch-for-react-19";
 import { ClientProviders } from "./ClientProviders";
@@ -8,13 +9,6 @@ const sora = Sora({
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700"],
 	variable: "--font-sora",
-	display: "swap",
-});
-
-const poppins = Poppins({
-	subsets: ["latin"],
-	weight: ["400", "500", "600", "700"],
-	variable: "--font-poppins",
 	display: "swap",
 });
 
@@ -37,7 +31,7 @@ export const viewport: Viewport = {
 	width: "device-width",
 	initialScale: 1,
 	maximumScale: 1,
-	themeColor: "#6d4a9c",
+	themeColor: "#1E90FF",
 };
 
 export default function RootLayout({
@@ -46,11 +40,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang="en"
-			className={`${sora.variable} ${poppins.variable}`}
-			suppressHydrationWarning
-		>
+		<html lang="en" className={sora.variable} suppressHydrationWarning>
 			<head>
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				<link
