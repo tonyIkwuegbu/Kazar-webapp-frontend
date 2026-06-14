@@ -1,112 +1,151 @@
 import React from "react";
 import Image from "next/image";
-import Button from "../elements/Button";
-import { Pattern1, Pattern2 } from "@/assets";
+import Link from "next/link";
+import { HeroImage } from "@/assets";
+
+const TRUST_STATS = [
+	{ value: "₦0", label: "Lost to fraud" },
+	{ value: "100%", label: "Secure transactions" },
+	{ value: "2 mins", label: "Average deal creation" },
+];
 
 const HeroArea: React.FC = () => {
 	return (
-		<section className="relative min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-4.5rem)] pt-16 lg:pt-18 flex items-center justify-center overflow-hidden">
-			{/* Left Pattern */}
-			<div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none">
-				<Image
-					src={Pattern1}
-					alt="pattern-1"
-					width={400}
-					height={400}
-					className="
-						hidden lg:block w-[180px] sm:w-[250px] md:w-[300px] lg:w-[400px] h-auto
-						opacity-50 dark:opacity-0
-						transition-opacity duration-300
-					"
-					priority
-				/>
-			</div>
+		<section className="relative flex items-center min-h-[calc(100vh-4rem)] pt-24 sm:pt-16 overflow-hidden bg-white dark:bg-graydark">
+			{/* Subtle radial glow — pure CSS, no image assets */}
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0"
+				style={{
+					background:
+						"radial-gradient(ellipse 70% 50% at 50% -5%, rgba(37,154,230,0.08) 0%, transparent 70%)",
+				}}
+			/>
 
-			{/* Right Pattern */}
-			<div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none">
-				<Image
-					src={Pattern2}
-					alt="pattern-2"
-					width={400}
-					height={400}
-					className="
-						hidden lg:block w-[180px] sm:w-[250px] md:w-[300px] lg:w-[400px] h-auto
-						opacity-50 dark:opacity-0
-						transition-opacity duration-300
-					"
-					priority
-				/>
-			</div>
-
-			{/* Hero Content */}
-			<div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-				<div className="max-w-5xl mx-auto">
-					<div className="inline-flex items-center px-4 py-2 mb-8 bg-white/80 dark:bg-graydark/40 backdrop-blur-sm rounded-full border border-bodydark1/20 shadow-1">
-						<span className="text-xs sm:text-sm text-bodydark2 font-medium">
-							🔒 Buy, Sell, Or Offer Services — Safely.
-						</span>
-					</div>
-
-					<div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-						<h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-graydark dark:text-white leading-tight">
-							Transact{" "}
-							<span className="text-meta-5">
-								Safely
-								<span className=" w-full h-1 bg-gradient-to-r from-meta-5/40 to-meta-5/10 rounded-full"></span>
+			<div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
+				<div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+					{/* ── Left: copy ── */}
+					<div className="text-center lg:text-left">
+						{/* Eyebrow */}
+						<div className="inline-flex items-center gap-2 px-3 py-1.5 mb-7 sm:mb-8 rounded-full border border-meta-5/20 dark:border-meta-5/30 bg-meta-5/5 dark:bg-meta-5/10">
+							<span className="h-1.5 w-1.5 rounded-full bg-meta-5 animate-pulse" />
+							<span className="text-xs font-semibold tracking-widest uppercase text-meta-5">
+								Now in early access
 							</span>
-							.
+						</div>
+
+						{/* Headline */}
+						<h1 className="text-[clamp(2.5rem,6vw,4.25rem)] font-bold leading-[1.08] tracking-tight text-graydark dark:text-white">
+							Trade without{" "}
+							<span className="relative inline-block text-meta-5">
+								fear
+								<span
+									aria-hidden="true"
+									className="absolute -bottom-1.5 left-0 h-[4px] w-full rounded-full bg-meta-5/25"
+								/>
+							</span>{" "}
+							of fraud.
 						</h1>
-						<h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-graydark dark:text-white leading-tight">
-							Trust{" "}
-							<span className="text-meta-5 relative">
-								KAZAR
-								<span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-meta-5/40 to-meta-5/10 rounded-full"></span>
-							</span>
-							.
-						</h2>
-					</div>
 
-					<p className="text-base animate-tada sm:text-lg md:text-2xl text-bodydark2 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
-						With KAZAR&apos;s smart escrow system, you&apos;ll never lose money
-						to fake buyers or sellers again.
-					</p>
-
-					<div className="flex flex-col xsm:flex-row items-center justify-center gap-3 sm:gap-6">
-						<Button
-							label="See how it works"
-							className="
-								px-6 sm:px-8 py-3 sm:py-4 text-sm md:text-lg font-medium
-								text-bodydark2 hover:text-meta-5 
-								border-2 border-bodydark1/60 hover:border-meta-5/50
-								bg-white backdrop-blur-sm hover:bg-white
-								rounded-xl shadow-2 hover:shadow-4
-								transition-all duration-300 transform hover:scale-105
-								focus:outline-none focus:ring-2 focus:ring-meta-5/20
-								min-w-[160px] sm:min-w-[190px]
-							"
-						/>
-						<Button
-							label="Try Kazaar for free →"
-							className="
-								px-6 sm:px-8 py-3 sm:py-4 text-sm md:text-lg font-medium
-								bg-meta-5 hover:bg-meta-5/90 text-white 
-								rounded-xl shadow-4 hover:shadow-6
-								transition-all duration-300 transform hover:scale-105
-								focus:outline-none focus:ring-2 focus:ring-meta-5/20
-								min-w-[160px] sm:min-w-[190px]
-								relative overflow-hidden
-								before:absolute before:inset-0 before:bg-gradient-to-r 
-								before:from-transparent before:via-white/20 before:to-transparent
-								before:translate-x-[-200%] hover:before:translate-x-[200%]
-								before:transition-transform before:duration-700
-							"
-						/>
-					</div>
-
-					<div className="mt-12 sm:mt-16 flex flex-col items-center space-y-3">
-						<p className="text-xs sm:text-sm text-bodydark2/70 font-medium">
-							Trusted by thousands of users worldwide
+						<p className="mt-6 text-lg sm:text-xl leading-relaxed text-bodydark2 dark:text-bodydark max-w-md mx-auto lg:mx-0">
+							Kazar holds your money in escrow until both buyer and seller
+							confirm the deal is done — no risk, no fake buyers, no lost cash.
 						</p>
+
+						{/* CTAs */}
+						<div className="mt-9 sm:mt-10 flex flex-wrap gap-3 justify-center lg:justify-start">
+							<Link
+								href="#waitlist"
+								className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-semibold text-white bg-meta-5 hover:bg-meta-5/90 transition-all duration-200 hover:-translate-y-px active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-meta-5/40"
+							>
+								Join the waitlist
+								<svg
+									viewBox="0 0 16 16"
+									fill="none"
+									className="w-4 h-4"
+									aria-hidden="true"
+								>
+									<path
+										d="M3 8h10M9 4l4 4-4 4"
+										stroke="currentColor"
+										strokeWidth="1.5"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+							</Link>
+							<Link
+								href="#how-it-works"
+								className="inline-flex items-center px-7 py-3.5 rounded-xl text-base font-medium text-bodydark2 dark:text-bodydark border border-bodydark1/50 dark:border-white/15 hover:border-meta-5 hover:text-meta-5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-meta-5/40"
+							>
+								See how it works
+							</Link>
+						</div>
+
+						{/* Trust stats */}
+						<div className="mt-12 flex items-center gap-6 sm:gap-8 flex-wrap justify-center lg:justify-start">
+							{TRUST_STATS.map((stat, i) => (
+								<React.Fragment key={stat.label}>
+									{i > 0 && (
+										<div className="h-9 w-px bg-bodydark1/50 dark:bg-white/10" />
+									)}
+									<div className="flex flex-col gap-1">
+										<span className="text-xl sm:text-2xl font-bold tracking-tight text-graydark dark:text-white">
+											{stat.value}
+										</span>
+										<span className="text-xs sm:text-sm text-bodydark2 dark:text-bodydark">
+											{stat.label}
+										</span>
+									</div>
+								</React.Fragment>
+							))}
+						</div>
+					</div>
+
+					{/* ── Right: 3D hero image ── */}
+					<div className="flex justify-center lg:justify-end">
+						<div
+							className="relative w-full max-w-[220px] sm:max-w-[260px] lg:max-w-[320px]"
+							style={{ perspective: "1600px" }}
+						>
+							<div
+								className="group relative rounded-[1.25rem] overflow-hidden border border-bodydark1/30 dark:border-white/10 transition-transform duration-700 ease-out will-change-transform hover:[transform:rotateY(-6deg)_rotateX(2deg)_scale(1.015)]"
+								style={{
+									transform: "rotateY(-30deg) rotateX(30deg)",
+									transformStyle: "preserve-3d",
+									boxShadow:
+										"24px 32px 60px -20px rgba(37,154,230,0.4), 0 10px 30px -10px rgba(0,0,0,0.15)",
+								}}
+							>
+								<Image
+									src={HeroImage}
+									alt="Kazar mobile app showing an active escrow deal"
+									width={400}
+									height={820}
+									className="w-full h-auto object-cover block"
+									priority
+								/>
+								{/* Glass sheen overlay for depth */}
+								<div
+									aria-hidden="true"
+									className="pointer-events-none absolute inset-0"
+									style={{
+										background:
+											"linear-gradient(115deg, rgba(255,255,255,0.22) 0%, transparent 35%, transparent 70%, rgba(0,0,0,0.1) 100%)",
+									}}
+								/>
+							</div>
+
+							{/* Ambient glow behind the image */}
+							<div
+								aria-hidden="true"
+								className="pointer-events-none absolute -inset-8 -z-10 rounded-[2rem] opacity-60 dark:opacity-40 blur-3xl"
+								style={{
+									background:
+										"radial-gradient(circle at 65% 45%, rgba(37,154,230,0.35), transparent 70%)",
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
