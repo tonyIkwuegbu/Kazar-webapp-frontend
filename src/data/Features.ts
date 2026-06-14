@@ -1,76 +1,76 @@
 import {
 	ShieldCheck,
-	QrCode,
-	MessageSquare,
-	CreditCard,
-	Users,
-	Zap,
+	Link2,
+	Scale,
+	BadgeCheck,
+	MessagesSquare,
+	Layers,
 	Lock,
-	Shield,
+	Smartphone,
 } from "lucide-react";
 
 export const features = [
 	{
 		icon: ShieldCheck,
-		title: "Bank-Level Security",
+		title: "Funds Held in Escrow",
 		description:
-			"Military-grade encryption and end-to-end escrow technology protect every transaction from start to finish.",
+			"Money sits safely with Kazar until both sides confirm the deal — sellers can't be ghosted, buyers can't be scammed.",
 		iconBg: "bg-meta-5/10",
 		iconColor: "text-meta-5",
 	},
 	{
-		icon: QrCode,
-		title: "QR Codes & Links",
+		icon: Link2,
+		title: "Share a Deal in Seconds",
 		description:
-			"Share deals using custom secure QR codes or shareable links. No app download required for buyers.",
+			"Create a deal and share a link via socials. The other party previews and joins instantly, no account required to view.",
 		iconBg: "bg-warning/10",
 		iconColor: "text-warning",
 	},
 	{
-		icon: MessageSquare,
-		title: "Dispute Resolution",
+		icon: MessagesSquare,
+		title: "Built-In Negotiation",
 		description:
-			"Our expert mediation and arbitration with 24/7 support team. We protect both buyers and sellers.",
+			"Buyers can accept, decline, or negotiate price, delivery timeline, fees, and more — up to three rounds, all tracked in one place.",
 		iconBg: "bg-meta-5/10",
 		iconColor: "text-meta-5",
 	},
 	{
-		icon: CreditCard,
-		title: "Trusted Payment Gateway",
+		icon: Scale,
+		title: "Fair Dispute Resolution",
 		description:
-			"Integrated with Paystack, Flutterwave, and other trusted Nigerian payment providers.",
+			"If something's wrong — item not as described, damaged, or never arrived — raise a dispute for a full refund, partial refund, or replacement.",
 		iconBg: "bg-bodydark/10",
 		iconColor: "text-bodydark",
 	},
 	{
-		icon: Users,
-		title: "Multi-Party Transactions",
+		icon: BadgeCheck,
+		title: "Tiered Accounts",
 		description:
-			"Support for complex deals involving multiple buyers, sellers, and service providers.",
+			"Start small and upgrade as you trade more. Higher tiers unlock higher transaction limits as your account builds trust.",
 		iconBg: "bg-warning/10",
 		iconColor: "text-warning",
 	},
 	{
-		icon: Zap,
-		title: "Instant Settlements",
+		icon: Layers,
+		title: "Track Every Step",
 		description:
-			"Automatic fund release upon delivery confirmation. No waiting, no delays, no hassles.",
+			"From funding to shipping to delivery confirmation, every deal milestone is tracked with real-time notifications.",
 		iconBg: "bg-meta-5/10",
 		iconColor: "text-meta-5",
 	},
 	{
 		icon: Lock,
-		title: "Privacy Protected",
+		title: "Privacy by Default",
 		description:
-			"Your personal and financial data is encrypted and never shared with third parties.",
+			"Mask your wallet balance, control what's visible, and keep your financial details away from prying eyes.",
 		iconBg: "bg-bodydark/10",
 		iconColor: "text-bodydark",
 	},
 	{
-		icon: Shield,
-		title: "Buyer & Seller Protection",
+		icon: Smartphone,
+		title: "Mobile-First Experience",
 		description:
-			"We safeguard both sides of every transaction with strict compliance and monitoring.",
+			"Manage deals, disputes, and your wallet from the Kazar app — built for how Nigerians actually trade online.",
 		iconBg: "bg-warning/10",
 		iconColor: "text-warning",
 	},
