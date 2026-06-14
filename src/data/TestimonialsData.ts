@@ -2,7 +2,7 @@ import { Testimonial1, Testimonial2, Testimonial3 } from "@/assets";
 
 export const testimonials = [
 	{
-		name: "Chijioke Okafor",
+		name: "Fatima Bello",
 		avatar: Testimonial1,
 		rating: 4,
 		text: "Kazar Escrow has transformed the way I handle transactions. The platform is secure and user-friendly, making it easy to manage my funds. I feel confident knowing my money is safe with them.",
