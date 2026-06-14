@@ -1,16 +1,19 @@
-import axios, { Axios, AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import cacheService from "./cache.service";
+import axios, {
+	AxiosInstance,
+	AxiosResponse,
+	InternalAxiosRequestConfig,
+	AxiosRequestConfig,
+} from "axios";
+
+const USER_EMAIL_KEY = "_user_email";
 
 class RequestService {
-	baseUrl: string;
-	axiosClient: Axios;
+	axiosClient: AxiosInstance;
 
 	constructor() {
-		this.baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-
 		this.axiosClient = axios.create({
-			baseURL: this.baseUrl,
 			timeout: 30000,
+			withCredentials: true,
 		});
 
 		this.axiosClient.interceptors.request.use(
@@ -23,32 +26,26 @@ class RequestService {
 		);
 	}
 
+	/** Reads the logged-in user's email directly from localStorage, if present. */
+	private getUserEmail(): string | null {
+		if (typeof window === "undefined") return null;
+		return localStorage.getItem(USER_EMAIL_KEY);
+	}
+
 	private async requestInterceptor(
 		config: InternalAxiosRequestConfig,
 	): Promise<InternalAxiosRequestConfig> {
-		// Skip adding Authorization if already set ( for Google OAuth)
-		if (!config.headers.get("Authorization")) {
-			const credentials: any = cacheService.getCredentials();
-			const token = credentials?.token;
-
-			if (!credentials) {
-				console.warn(
-					"cacheService.getCookieDomain() returned null. Cookie may not be set or accessible. Skipping Authorization header.",
-				);
-			} else if (!token) {
-				console.warn(
-					"No token found in cacheService.getCookieDomain(). Credentials:",
-					credentials,
-					"Skipping Authorization header.",
-				);
-			} else {
-				config.headers.set("Authorization", `Bearer ${token}`);
-			}
+		// Pass email so proxy can generate signature server-side.
+		// If absent (e.g. anonymous waitlist requests), the proxy falls
+		// back to a guest identity.
+		const email = this.getUserEmail();
+		if (email) {
+			config.headers.set("x-user-email", email);
 		}
 
 		if (config.data instanceof FormData) {
 			config.headers.delete("Content-Type");
-		} else {
+		} else if (!config.headers.get("Content-Type")) {
 			config.headers.set("Content-Type", "application/json");
 		}
 
@@ -63,41 +60,75 @@ class RequestService {
 		if (axios.isCancel(error)) {
 			return Promise.reject({
 				message: "Request was cancelled. Please try again.",
+				statusCode: 0,
 			});
 		}
-		return Promise.reject(
-			error?.response?.data || {
-				message:
-					"Unable to perform request. Our engineers are looking into this error.",
-			},
+		if (error?.response?.data) {
+			return Promise.reject({
+				...error.response.data,
+				statusCode: error.response.status,
+			});
+		}
+		return Promise.reject({
+			message: error?.message || "Unable to perform request.",
+			statusCode: error?.response?.status || 1000,
+		});
+	}
+
+	async post<TResponse = any>(
+		url: string,
+		data?: any,
+		config?: AxiosRequestConfig,
+	): Promise<TResponse> {
+		return this.axiosClient.post(
+			`/api/proxy?endpoint=${encodeURIComponent(url)}`,
+			data,
+			config,
 		);
 	}
 
-	async post<T>(
+	async get<TResponse = any>(
 		url: string,
-		data: T,
-		headerConfig?: InternalAxiosRequestConfig,
-	): Promise<any> {
-		return this.axiosClient.post(url, data, headerConfig);
+		config?: AxiosRequestConfig,
+	): Promise<TResponse> {
+		return this.axiosClient.get(
+			`/api/proxy?endpoint=${encodeURIComponent(url)}`,
+			config,
+		);
 	}
 
-	async get<T>(
+	async put<TResponse = any>(
 		url: string,
-		options?: InternalAxiosRequestConfig,
-	): Promise<any> {
-		return this.axiosClient.get<T>(url, options);
+		data?: any,
+		config?: AxiosRequestConfig,
+	): Promise<TResponse> {
+		return this.axiosClient.put(
+			`/api/proxy?endpoint=${encodeURIComponent(url)}`,
+			data,
+			config,
+		);
 	}
 
-	async put<T>(
+	async delete<TResponse = any>(
 		url: string,
-		data: T,
-		headerConfig?: InternalAxiosRequestConfig,
-	): Promise<any> {
-		return this.axiosClient.put(url, data, headerConfig);
+		config?: AxiosRequestConfig,
+	): Promise<TResponse> {
+		return this.axiosClient.delete(
+			`/api/proxy?endpoint=${encodeURIComponent(url)}`,
+			config,
+		);
 	}
 
-	async delete(url: string): Promise<any> {
-		return this.axiosClient.delete(url);
+	async patch<TResponse = any>(
+		url: string,
+		data?: any,
+		config?: AxiosRequestConfig,
+	): Promise<TResponse> {
+		return this.axiosClient.patch(
+			`/api/proxy?endpoint=${encodeURIComponent(url)}`,
+			data,
+			config,
+		);
 	}
 }
 
