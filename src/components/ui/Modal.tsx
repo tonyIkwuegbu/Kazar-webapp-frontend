@@ -20,7 +20,7 @@ export function Modal({
 	fullHeight,
 }: ModalProps) {
 	const modalV = tv({
-		base: "modal bg-white rounded-md transition-all duration-300 ease-in-out transform w-full mx-auto flex flex-col",
+		base: "modal bg-white dark:bg-graydark text-graydark dark:text-white rounded-md transition-all duration-300 ease-in-out transform w-full mx-auto flex flex-col",
 		variants: {
 			size: {
 				xsm: "md:max-w-[400px]",
@@ -42,7 +42,6 @@ export function Modal({
 		} else {
 			document.body.style.overflow = "auto";
 		}
-
 		return () => {
 			document.body.style.overflow = "auto";
 		};
@@ -57,21 +56,24 @@ export function Modal({
 	}
 
 	return (
-		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-2">
+		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 dark:bg-black/70 p-2">
 			<div
 				className={modalV({ size, height: fullHeight ? "full" : "contain" })}
 			>
-				<div className="flex items-center justify-between p-4 border-b">
-					{title && <h6 className="text-[24px] font-bold truncate">{title}</h6>}
+				<div className="flex items-center justify-between p-4 border-b border-bodydark1/20 dark:border-white/10">
+					{title && (
+						<h6 className="text-[24px] font-bold truncate text-graydark dark:text-white">
+							{title}
+						</h6>
+					)}
 					<button
 						onClick={closeModal}
 						aria-label="Close modal"
-						className="text-red-500 hover:text-red-700 transition-colors"
+						className="text-danger hover:text-danger/80 transition-colors"
 					>
 						<CloseOutlined className="text-2xl" />
 					</button>
 				</div>
-
 				<div
 					className={`modal-content p-4 overflow-y-auto ${
 						fullHeight ? "h-[calc(100vh-80px)]" : "max-h-[70vh]"
