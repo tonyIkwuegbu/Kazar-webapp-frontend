@@ -73,15 +73,15 @@ const TrustedCommunity: React.FC<TrustedCommunityProps> = ({
 	const stats = [
 		{
 			icon: "👥",
-			value: useCounter(10000, 2000, isVisible),
+			value: useCounter(1000, 2000, isVisible),
 			suffix: "+",
 			label: "Protected Users",
 			color: "text-meta-5",
 		},
 		{
 			icon: "₦",
-			value: useCounter(2.5, 2000, isVisible),
-			suffix: "B+",
+			value: useCounter(10, 2000, isVisible),
+			suffix: "K+",
 			label: "Secured transactions",
 			color: "text-meta-5",
 		},
