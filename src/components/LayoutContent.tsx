@@ -1,8 +1,8 @@
 "use client";
 
 import Header from "@/components/ui/Header";
-import Footer from "@/components/ui/Footer";
 import "@ant-design/v5-patch-for-react-19";
+import Footer from "./ui/Footer";
 
 const LayoutContent: React.FC<{ children: React.ReactNode }> = ({
 	children,
