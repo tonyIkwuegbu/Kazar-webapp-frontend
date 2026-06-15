@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+
+	turbopack: {},
+
+	webpack: (config) => {
+		return config;
+	},
 };
 
 export default withPWA(nextConfig);
