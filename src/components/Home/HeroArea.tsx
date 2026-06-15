@@ -13,9 +13,9 @@ const TRUST_STATS = [
 const HeroArea: React.FC = () => {
 	return (
 		<section className="relative min-h-[calc(100dvh-80px)] pt-20 md:pt-10 lg:pt-0 flex items-center pb-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/60 to-white dark:from-graydark dark:via-[#1a2535] dark:to-graydark">
-			{" "}
 			{/* Subtle background accent */}
 			<div className="absolute inset-0 bg-[radial-gradient(at_30%_20%,rgba(37,154,230,0.08)_0%,transparent_30%)] dark:bg-[radial-gradient(at_30%_20%,rgba(37,154,230,0.12)_0%,transparent_60%)]" />
+
 			<div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full z-10">
 				<div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 					{/* Left Content */}
@@ -27,7 +27,7 @@ const HeroArea: React.FC = () => {
 							</span>
 						</div>
 
-						<h1 className=" tracking-wide text-[42px] md:text-[52px] lg:text-[58px] leading-[1.05] font-bold text-graydark dark:text-white">
+						<h1 className="tracking-wide text-[42px] md:text-[52px] lg:text-[58px] leading-[1.05] font-bold text-graydark dark:text-white">
 							Trade without <span className="text-meta-5">fear</span> of fraud.
 						</h1>
 
@@ -36,23 +36,23 @@ const HeroArea: React.FC = () => {
 							deal — no risk, no fake buyers, no lost cash.
 						</p>
 
-						{/* CTAs using your custom Button */}
-						<div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-							<Link href="#waitlist">
+						{/* CTAs - Improved Mobile Experience */}
+						<div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full max-w-md mx-auto lg:mx-0">
+							<Link href="#waitlist" className="w-full sm:w-auto">
 								<Button
 									theme="primary"
 									size="md"
-									className="text-base font-semibold min-w-[220px]"
+									className="text-base font-semibold w-full sm:min-w-[220px]"
 								>
 									Join the Waitlist
 								</Button>
 							</Link>
 
-							<Link href="#how-it-works">
+							<Link href="#how-it-works" className="w-full sm:w-auto">
 								<Button
 									theme="secondary"
 									size="md"
-									className="text-base font-medium min-w-[220px]"
+									className="text-base font-medium w-full sm:min-w-[220px]"
 								>
 									See How It Works
 								</Button>
@@ -90,7 +90,7 @@ const HeroArea: React.FC = () => {
 									transformStyle: "preserve-3d",
 								}}
 							>
-								<div className="rounded-[2.75rem] overflow-hidden dark:border-white/90">
+								<div className="rounded-[2.75rem] overflow-hidden dark:border-white/90 shadow-2xl">
 									<Image
 										src={HeroImage}
 										alt="Kazar mobile app interface"
