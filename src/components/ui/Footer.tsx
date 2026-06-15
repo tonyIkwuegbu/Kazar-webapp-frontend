@@ -48,7 +48,7 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 		},
 		{
 			icon: FaFacebookSquare,
-			href: "",
+			href: "https://www.facebook.com/share/1Czf4tkbii/?mibextid=wwXIfr",
 			label: "Facebook",
 			bgColor: "bg-[#1877F2]",
 			hoverColor: "hover:bg-[#166FE5]",
