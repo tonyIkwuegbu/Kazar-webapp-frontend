@@ -1,7 +1,6 @@
+import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
-// @ts-expect-error: allow side-effect css import without type declarations
-import "./globals.css";
 import "@ant-design/v5-patch-for-react-19";
 import { ClientProviders } from "./ClientProviders";
 
