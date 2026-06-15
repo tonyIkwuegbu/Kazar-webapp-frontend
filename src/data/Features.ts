@@ -14,7 +14,7 @@ export const features = [
 		icon: ShieldCheck,
 		title: "Funds Held in Escrow",
 		description:
-			"Money sits safely with Kazar until both sides confirm the deal — sellers can't be ghosted, buyers can't be scammed.",
+			"Funds are held securely in escrow with a CBN-licensed financial institution until both parties confirm the deal. Kazar also complies with SCUML requirements to help ensure secure and trustworthy transactions.",
 		iconBg: "bg-meta-5/10",
 		iconColor: "text-meta-5",
 	},
