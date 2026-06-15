@@ -55,14 +55,14 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 		},
 		{
 			icon: FaLinkedin,
-			href: "",
+			href: "https://www.linkedin.com/company/kazar-tech/",
 			label: "LinkedIn",
 			bgColor: "bg-[#0A66C2]",
 			hoverColor: "hover:bg-[#085D9F]",
 		},
 		{
 			icon: FaTiktok,
-			href: "",
+			href: "https://www.tiktok.com/@kazar.africa?_r=1&_t=ZS-97DXjWLlJHI",
 			label: "TikTok",
 			bgColor: "bg-[#000000]",
 			hoverColor: "hover:bg-[#111111]",
