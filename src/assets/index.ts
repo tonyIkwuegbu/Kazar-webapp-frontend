@@ -18,6 +18,7 @@ import HeroImage from "./home-portrait.png";
 import Step1 from "./Step1.png";
 import Step2 from "./Step2.png";
 import Step3 from "./Step3.png";
+import BgImage from "./bg-image.png";
 
 export {
 	LogoIcon,
@@ -40,4 +41,5 @@ export {
 	StepOneImage,
 	StepTwoImage,
 	StepThreeImage,
+	BgImage,
 };
