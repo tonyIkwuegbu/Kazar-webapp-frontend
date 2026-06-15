@@ -14,7 +14,7 @@ export const features = [
 		icon: ShieldCheck,
 		title: "Funds Held in Escrow",
 		description:
-			"Funds are held securely in escrow with a CBN-licensed financial institution until both parties confirm the deal. Kazar also complies with SCUML requirements to help ensure secure and trustworthy transactions.",
+			"Funds are held securely in escrow with a CBN-licensed financial institution until both parties confirm the deal. Kazar is fully SCUML-compliant, so every transaction meets Nigeria's anti-money laundering standards.",
 		iconBg: "bg-meta-5/10",
 		iconColor: "text-meta-5",
 	},
