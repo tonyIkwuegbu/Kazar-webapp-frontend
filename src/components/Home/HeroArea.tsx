@@ -5,9 +5,9 @@ import { HeroImage } from "@/assets";
 import Button from "../elements/Button";
 
 const TRUST_STATS = [
-	{ value: "₦0", label: "Lost to fraud" },
-	{ value: "100%", label: "Secure transactions" },
-	{ value: "2 mins", label: "Average deal creation" },
+	{ value: "₦0", label: "No fraud loss" },
+	{ value: "100%", label: "Secure" },
+	{ value: "2 mins", label: "Deal creation" },
 ];
 
 const HeroArea: React.FC = () => {
@@ -16,61 +16,63 @@ const HeroArea: React.FC = () => {
 			{/* Subtle background accent */}
 			<div className="absolute inset-0 bg-[radial-gradient(at_30%_20%,rgba(37,154,230,0.08)_0%,transparent_30%)] dark:bg-[radial-gradient(at_30%_20%,rgba(37,154,230,0.12)_0%,transparent_60%)]" />
 
-			<div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full z-10">
+			<div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full z-10">
 				<div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 					{/* Left Content */}
 					<div className="flex flex-col justify-center text-center lg:text-left">
-						<div className="inline-flex items-center justify-center gap-2 px-5 py-2 mb-8 rounded-full border border-meta-5/30 bg-meta-5/5 dark:bg-meta-5/10">
-							<span className="h-2 w-2 rounded-full bg-meta-5 animate-pulse" />
-							<span className="text-sm font-semibold tracking-[2px] uppercase text-meta-5">
-								NOW IN EARLY ACCESS
+						{/* Eyebrow */}
+						<div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-meta-5/30 bg-meta-5/5 dark:bg-meta-5/10 self-center lg:self-start">
+							<span className="h-1.5 w-1.5 rounded-full bg-meta-5 animate-pulse" />
+							<span className="text-xs font-semibold tracking-[2px] uppercase text-meta-5">
+								Now in early access
 							</span>
 						</div>
 
-						<h1 className="tracking-wide text-[42px] md:text-[52px] lg:text-[58px] leading-[1.05] font-bold text-graydark dark:text-white">
+						{/* Headline */}
+						<h1 className="tracking-tight text-[36px] sm:text-[44px] md:text-[52px] lg:text-[58px] leading-[1.05] font-bold text-graydark dark:text-white">
 							Trade without <span className="text-meta-5">fear</span> of fraud.
 						</h1>
 
-						<p className="mt-6 text-lg md:text-xl text-bodydark2 dark:text-bodydark max-w-lg mx-auto lg:mx-0">
+						{/* Subtext */}
+						<p className="mt-5 text-base sm:text-lg md:text-xl text-bodydark2 dark:text-bodydark max-w-lg mx-auto lg:mx-0">
 							Kazar holds your money in escrow until both parties confirm the
 							deal — no risk, no fake buyers, no lost cash.
 						</p>
 
-						{/* CTAs - Improved Mobile Experience */}
-						<div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full max-w-md mx-auto lg:mx-0">
-							<Link href="#waitlist" className="w-full sm:w-auto">
+						{/* CTAs */}
+						<div className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-sm mx-auto sm:max-w-none lg:mx-0">
+							<Link href="#waitlist" className="w-full sm:w-1/2">
 								<Button
 									theme="primary"
 									size="md"
-									className="text-base font-semibold w-full sm:min-w-[220px]"
+									className="w-full text-sm sm:text-base font-semibold whitespace-nowrap"
 								>
-									Join the Waitlist
+									Join Waitlist
 								</Button>
 							</Link>
-
-							<Link href="#how-it-works" className="w-full sm:w-auto">
+							<Link href="#how-it-works" className="w-full sm:w-1/2">
 								<Button
 									theme="secondary"
 									size="md"
-									className="text-base font-medium w-full sm:min-w-[220px]"
+									className="w-full text-sm sm:text-base font-medium whitespace-nowrap"
 								>
-									See How It Works
+									How It Works
 								</Button>
 							</Link>
 						</div>
 
 						{/* Trust Stats */}
-						<div className="mt-12 flex items-center justify-center lg:justify-start gap-8 sm:gap-10">
+						<div className="mt-10 w-full flex items-start justify-between sm:justify-center lg:justify-start sm:gap-10 px-2 sm:px-0">
 							{TRUST_STATS.map((stat, i) => (
 								<React.Fragment key={i}>
 									{i > 0 && (
-										<div className="h-9 w-px bg-bodydark1/60 dark:bg-bodydark/30" />
+										<div className="h-10 w-px bg-bodydark1/40 dark:bg-bodydark/20 flex-shrink-0 self-center" />
 									)}
-									<div>
-										<div className="text-3xl font-bold text-graydark dark:text-white">
+									<div className="flex flex-col items-center lg:items-start flex-1 sm:flex-none">
+										<div className="text-xl sm:text-2xl lg:text-3xl font-bold text-graydark dark:text-white leading-tight">
 											{stat.value}
 										</div>
-										<div className="text-sm text-bodydark2 dark:text-bodydark mt-1">
+										<div className="text-[11px] sm:text-sm text-bodydark2 dark:text-bodydark mt-1 leading-tight text-center lg:text-left">
 											{stat.label}
 										</div>
 									</div>
@@ -79,18 +81,18 @@ const HeroArea: React.FC = () => {
 						</div>
 					</div>
 
-					{/* Right Side - Slanted Phone */}
-					<div className="flex justify-center lg:justify-end pt-8 lg:pt-0">
+					{/* Right Side - Phone */}
+					<div className="flex justify-center lg:justify-end animate-wobble">
 						<div className="relative">
 							<div
-								className="relative w-full max-w-[340px] md:max-w-[380px] transition-all duration-700 hover:scale-105"
+								className="relative w-[200px] sm:w-[280px] md:w-[320px] lg:w-[380px] transition-all duration-700 hover:scale-105"
 								style={{
 									transform:
 										"perspective(1200px) rotateY(-30deg) rotateX(30deg)",
 									transformStyle: "preserve-3d",
 								}}
 							>
-								<div className="rounded-[2.75rem] overflow-hidden dark:border-white/90 shadow-2xl">
+								<div className="rounded-[2.75rem] overflow-hidden shadow-2xl">
 									<Image
 										src={HeroImage}
 										alt="Kazar mobile app interface"
@@ -100,7 +102,6 @@ const HeroArea: React.FC = () => {
 										priority
 									/>
 								</div>
-
 								{/* Ambient glow */}
 								<div className="absolute -inset-10 -z-10 bg-meta-5/20 dark:bg-meta-5/10 blur-3xl rounded-[4rem]" />
 							</div>
