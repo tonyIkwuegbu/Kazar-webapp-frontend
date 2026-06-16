@@ -13,8 +13,32 @@ const TRUST_STATS = [
 const HeroArea: React.FC = () => {
 	return (
 		<section className="relative min-h-[calc(100dvh-80px)] pt-20 md:pt-10 lg:pt-0 flex items-center pb-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/60 to-white dark:from-graydark dark:via-[#1a2535] dark:to-graydark">
-			{/* Subtle background accent */}
-			<div className="absolute inset-0 bg-[radial-gradient(at_30%_20%,rgba(37,154,230,0.08)_0%,transparent_30%)] dark:bg-[radial-gradient(at_30%_20%,rgba(37,154,230,0.12)_0%,transparent_60%)]" />
+			{/* Grid lines */}
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0"
+				style={{
+					backgroundImage: `
+						linear-gradient(rgba(37,154,230,0.07) 1px, transparent 1px),
+						linear-gradient(90deg, rgba(37,154,230,0.07) 1px, transparent 1px)
+					`,
+					backgroundSize: "72px 72px",
+					maskImage:
+						"radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%)",
+					WebkitMaskImage:
+						"radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 100%)",
+				}}
+			/>
+
+			{/* Radial glow over grid */}
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0"
+				style={{
+					background:
+						"radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,154,230,0.08) 0%, transparent 70%)",
+				}}
+			/>
 
 			<div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full z-10">
 				<div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
