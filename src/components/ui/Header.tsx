@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { LogoImage } from "@/assets";
 import DarkModeButton from "../elements/DarkModeButton";
 
@@ -16,6 +17,9 @@ const Header: React.FC = () => {
 	const [mobileOpen, setMobileOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const menuRef = useRef<HTMLDivElement>(null);
+	const pathname = usePathname();
+	const router = useRouter();
+	const isHome = pathname === "/";
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 20);
@@ -39,6 +43,17 @@ const Header: React.FC = () => {
 			document.removeEventListener("mousedown", onClickOutside);
 		};
 	}, [mobileOpen]);
+
+	const handleNavClick = (e: React.MouseEvent, anchor: string) => {
+		e.preventDefault();
+		setMobileOpen(false);
+		const id = anchor.replace("#", "");
+		if (isHome) {
+			document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+		} else {
+			router.push(`/${anchor}`);
+		}
+	};
 
 	return (
 		<header
@@ -69,13 +84,14 @@ const Header: React.FC = () => {
 					{/* Desktop nav */}
 					<nav className="hidden md:flex items-center gap-1">
 						{NAV_LINKS.map(({ href, label }) => (
-							<Link
+							<a
 								key={href}
-								href={href}
-								className="px-4 py-2 rounded-lg text-sm font-medium text-bodydark2 dark:text-bodydark hover:text-meta-5 dark:hover:text-meta-5 hover:bg-meta-5/5 dark:hover:bg-meta-5/10 transition-colors duration-200"
+								href={isHome ? href : `/${href}`}
+								onClick={(e) => handleNavClick(e, href)}
+								className="px-4 py-2 rounded-lg text-sm font-medium text-bodydark2 dark:text-bodydark hover:text-meta-5 dark:hover:text-meta-5 hover:bg-meta-5/5 dark:hover:bg-meta-5/10 transition-colors duration-200 cursor-pointer"
 							>
 								{label}
-							</Link>
+							</a>
 						))}
 					</nav>
 
@@ -89,15 +105,16 @@ const Header: React.FC = () => {
 						>
 							Login
 						</span>
-						{/* <Link
-							href="#waitlist"
+						{/* <a
+							href={isHome ? "#waitlist" : "/#waitlist"}
+							onClick={(e) => handleNavClick(e, "#waitlist")}
 							className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-meta-5 hover:bg-meta-5/90 transition-all duration-200 hover:-translate-y-px active:translate-y-0"
 						>
 							Join waitlist
-						</Link> */}
+						</a> */}
 					</div>
 
-					{/* Mobile: dark mode + hamburger */}
+					{/* Mobile */}
 					<div className="flex md:hidden items-center gap-2">
 						<DarkModeButton />
 						<button
@@ -129,14 +146,14 @@ const Header: React.FC = () => {
 				>
 					<div className="border-t border-bodydark1/20 dark:border-white/10 py-4 space-y-1">
 						{NAV_LINKS.map(({ href, label }) => (
-							<Link
+							<a
 								key={href}
-								href={href}
-								onClick={() => setMobileOpen(false)}
-								className="block px-4 py-3 rounded-lg text-sm font-medium text-bodydark2 dark:text-bodydark hover:text-meta-5 hover:bg-meta-5/5 dark:hover:bg-meta-5/10 transition-colors duration-200"
+								href={isHome ? href : `/${href}`}
+								onClick={(e) => handleNavClick(e, href)}
+								className="block px-4 py-3 rounded-lg text-sm font-medium text-bodydark2 dark:text-bodydark hover:text-meta-5 hover:bg-meta-5/5 dark:hover:bg-meta-5/10 transition-colors duration-200 cursor-pointer"
 							>
 								{label}
-							</Link>
+							</a>
 						))}
 						<div className="pt-3 mt-2 border-t border-bodydark1/20 dark:border-white/10 space-y-2">
 							<span
@@ -146,13 +163,13 @@ const Header: React.FC = () => {
 							>
 								Login
 							</span>
-							{/* <Link
-								href="#waitlist"
-								onClick={() => setMobileOpen(false)}
+							{/* <a
+								href={isHome ? "#waitlist" : "/#waitlist"}
+								onClick={(e) => handleNavClick(e, "#waitlist")}
 								className="flex w-full items-center justify-center px-4 py-3 rounded-lg text-sm font-semibold text-white bg-meta-5 hover:bg-meta-5/90 transition-colors duration-200"
 							>
 								Join waitlist
-							</Link> */}
+							</a> */}
 						</div>
 					</div>
 				</div>
