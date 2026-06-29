@@ -1,6 +1,5 @@
 import React from "react";
 
-// ── Legal content ─────────────────────────────────────────────────────────────
 export const PRIVACY_POLICY = `KAZAR PRIVACY POLICY
 
 1. Introduction
@@ -162,36 +161,27 @@ These Terms are governed by the laws of the Federal Republic of Nigeria. Dispute
 Email: kazartechnology@gmail.com
 Address: Abuja, Nigeria`;
 
-// ── Formatted renderer ───────────────────────────────────────────────────────
-
-const TOP_LEVEL_HEADING = /^\d+\.\s/; // "1. Introduction"
-const SUB_HEADING = /^\d+\.\d+\s/; // "3.1 Information You Provide Directly"
-const BULLET = /^-\s/; // "- Full name and username"
+// ── Regex patterns ────────────────────────────────────────────────────────────
+const TOP_LEVEL_HEADING = /^\d+\.\s/;
+const SUB_HEADING = /^\d+\.\d+\s/;
+const BULLET = /^-\s/;
 const LABELLED_LINE = /^(Email|Address):\s*(.*)$/i;
 
-/**
- * Renders the legal text blocks (PRIVACY_POLICY / TERMS) with section
- * headings, sub-headings, bullet lists, and labelled contact lines styled
- * using the app's primary token for emphasis, with full dark mode support.
- * The first line (the document title) is rendered separately by the modal
- * title and skipped here.
- */
 export const LegalContent: React.FC<{ text: string }> = ({ text }) => {
 	const lines = text.split("\n");
-
 	const blocks: React.ReactNode[] = [];
 	let bulletBuffer: string[] = [];
 
 	const flushBullets = (key: string) => {
 		if (bulletBuffer.length === 0) return;
 		blocks.push(
-			<ul key={key} className="my-4 space-y-3 pl-1">
+			<ul key={key} className="my-4 space-y-2.5 pl-1">
 				{bulletBuffer.map((item, i) => (
 					<li
 						key={i}
 						className="flex gap-3 text-sm md:text-base text-bodydark2 dark:text-bodydark leading-relaxed"
 					>
-						<span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+						<span className="my-3 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
 						<span>{item}</span>
 					</li>
 				))}
@@ -200,7 +190,6 @@ export const LegalContent: React.FC<{ text: string }> = ({ text }) => {
 		bulletBuffer = [];
 	};
 
-	// Skip the first non-empty line (document title) — shown as the modal title instead.
 	let skippedTitle = false;
 
 	lines.forEach((rawLine, index) => {
@@ -229,7 +218,7 @@ export const LegalContent: React.FC<{ text: string }> = ({ text }) => {
 			blocks.push(
 				<h3
 					key={key}
-					className="mt-8 mb-3 text-base md:text-lg font-bold text-primary border-l-4 border-primary pl-3"
+					className="mt-10 mb-4 text-base md:text-lg font-bold text-primary py-6"
 				>
 					{line}
 				</h3>,
@@ -241,7 +230,7 @@ export const LegalContent: React.FC<{ text: string }> = ({ text }) => {
 			blocks.push(
 				<h4
 					key={key}
-					className="mt-5 mb-2 text-sm md:text-base font-semibold text-primary"
+					className="mt-6 mb-3 text-sm md:text-base font-semibold text-primary pl-1"
 				>
 					{line}
 				</h4>,
@@ -251,16 +240,27 @@ export const LegalContent: React.FC<{ text: string }> = ({ text }) => {
 
 		const labelMatch = line.match(LABELLED_LINE);
 		if (labelMatch) {
+			const isEmail = labelMatch[1].toLowerCase() === "email";
+			const value = labelMatch[2];
 			blocks.push(
-				<p
+				<div
 					key={key}
-					className="text-sm md:text-base text-bodydark2 dark:text-bodydark leading-relaxed mb-2"
+					className="flex items-center gap-3 py-2 text-sm md:text-base"
 				>
-					<span className="font-semibold text-graydark dark:text-white">
+					<span className="font-semibold text-graydark dark:text-white min-w-[70px]">
 						{labelMatch[1]}:
-					</span>{" "}
-					{labelMatch[2]}
-				</p>,
+					</span>
+					{isEmail ? (
+						<a
+							href={`mailto:${value}`}
+							className="text-primary hover:underline transition-colors"
+						>
+							{value}
+						</a>
+					) : (
+						<span className="text-bodydark2 dark:text-bodydark">{value}</span>
+					)}
+				</div>,
 			);
 			return;
 		}
@@ -277,5 +277,5 @@ export const LegalContent: React.FC<{ text: string }> = ({ text }) => {
 
 	flushBullets("ul-final");
 
-	return <div className="space-y-1">{blocks}</div>;
+	return <div className="space-y-0.5">{blocks}</div>;
 };
