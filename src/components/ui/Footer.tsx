@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
 	FaFacebookSquare,
 	FaInstagramSquare,
@@ -10,8 +11,6 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { LogoImage } from "@/assets";
-import { Modal } from "../ui/Modal";
-import { PRIVACY_POLICY, TERMS, LegalContent } from "../Home/LegalContent";
 
 interface FooterProps {
 	className?: string;
@@ -25,11 +24,8 @@ interface SocialLink {
 	hoverColor: string;
 }
 
-type LegalDoc = "privacy" | "terms" | null;
-
 const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 	const currentYear = new Date().getFullYear();
-	const [openDoc, setOpenDoc] = useState<LegalDoc>(null);
 
 	const socialLinks: SocialLink[] = [
 		{
@@ -77,8 +73,9 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 				<div className="max-w-7xl mx-auto">
 					<div className="py-8 md:py-12 lg:py-16">
 						<div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+							{/* Logo */}
 							<div className="flex-shrink-0">
-								<div className="flex items-center">
+								<Link href="/" className="inline-flex">
 									<Image
 										src={LogoImage}
 										alt="Kazar Logo"
@@ -87,9 +84,10 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 										className="h-8 md:h-10 lg:h-12 w-auto object-contain dark:brightness-0 dark:invert"
 										priority
 									/>
-								</div>
+								</Link>
 							</div>
 
+							{/* Copyright */}
 							<div className="flex-1 text-center order-3 lg:order-2">
 								<p className="text-sm md:text-base text-bodydark2 dark:text-bodydark font-medium">
 									© {currentYear} KAZAR. All rights reserved.
@@ -135,24 +133,22 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 						</div>
 					</div>
 
-					{/* Bottom Border */}
+					{/* Bottom bar */}
 					<div className="border-t border-bodydark1/10 dark:border-white/10 py-4 md:py-6">
 						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs md:text-sm text-bodydark2/90 dark:text-bodydark">
 							<div className="flex flex-wrap items-center gap-4 md:gap-6">
-								<button
-									type="button"
-									onClick={() => setOpenDoc("privacy")}
+								<Link
+									href="/privacy-policy"
 									className="hover:text-primary transition-colors duration-300"
 								>
 									Privacy Policy
-								</button>
-								<button
-									type="button"
-									onClick={() => setOpenDoc("terms")}
+								</Link>
+								<Link
+									href="/terms"
 									className="hover:text-primary transition-colors duration-300"
 								>
 									Terms of Service
-								</button>
+								</Link>
 							</div>
 							<div className="text-center sm:text-right">
 								<p>Made with ❤️ in Nigeria</p>
@@ -161,25 +157,6 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 					</div>
 				</div>
 			</div>
-
-			{/* Legal modals */}
-			<Modal
-				isOpen={openDoc === "privacy"}
-				onClose={() => setOpenDoc(null)}
-				title="Privacy Policy"
-				size="lg"
-			>
-				<LegalContent text={PRIVACY_POLICY} />
-			</Modal>
-
-			<Modal
-				isOpen={openDoc === "terms"}
-				onClose={() => setOpenDoc(null)}
-				title="Terms of Service"
-				size="lg"
-			>
-				<LegalContent text={TERMS} />
-			</Modal>
 		</footer>
 	);
 };
