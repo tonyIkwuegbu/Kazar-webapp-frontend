@@ -7,12 +7,12 @@ import PerfectForBusiness from "@/components/Home/PerfectForBusiness";
 import TrustedCommunity from "@/components/Home/TrustedCommunity";
 import WaitListForm from "@/components/Home/WaitListForm";
 import WhyChooseKazar from "@/components/Home/WhyChooseKazar";
-import Header from "@/components/ui/Header";
+//import Header from "@/components/ui/Header";
 
 export default function Home() {
 	return (
 		<div>
-			<Header />
+			{/* <Header /> */}
 			<HeroArea />
 			{/* <EscrowProcess /> */}
 			<HowItWorks />
