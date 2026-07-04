@@ -21,6 +21,10 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "developers.google.com",
 			},
+			{
+				protocol: "https",
+				hostname: "kazarstorage.s3.us-east-005.backblazeb2.com",
+			},
 		],
 	},
 	turbopack: {},

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { PublicTestimonial } from "@/app/core/services/testimonial.service";
+import { getFirstNameInitial } from "@/utils/helpers/imageInitials";
 
 interface Props {
 	testimonials: PublicTestimonial[];
@@ -61,7 +62,7 @@ function Avatar({
 	pictureUrl?: string | null;
 }) {
 	const [imgFailed, setImgFailed] = useState(false);
-	const initial = name.trim()[0]?.toUpperCase() ?? "?";
+	const initial = getFirstNameInitial(name);
 	const color = getAvatarColor(name);
 
 	if (pictureUrl && !imgFailed) {
@@ -71,9 +72,9 @@ function Avatar({
 					src={pictureUrl}
 					alt={name}
 					fill
+					sizes="56px"
 					className="rounded-full object-cover border-2 border-meta-5/30"
 					onError={() => setImgFailed(true)}
-					unoptimized
 				/>
 			</div>
 		);
