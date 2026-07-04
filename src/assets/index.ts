@@ -2,7 +2,7 @@ import LogoIcon from "./logo-icon.svg";
 import LogoImage from "./logo-image.png";
 import Pattern1 from "./pattern1.png";
 import Pattern2 from "./pattern2.png";
-import StepOneImage from "./imageOne.jpg";
+import StepOneImage from "./imageOne.png";
 import StepTwoImage from "./imageTwo.png";
 import StepThreeImage from "./imageThree.png";
 import Testimonial1 from "./testimonial1.png";
