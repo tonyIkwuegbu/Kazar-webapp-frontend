@@ -39,7 +39,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={sora.variable} suppressHydrationWarning>
+		<html
+			lang="en"
+			data-scroll-behavior="smooth"
+			className={`${sora.variable}`}
+		>
 			<head>
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				<link
