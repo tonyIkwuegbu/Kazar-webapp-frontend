@@ -38,11 +38,34 @@ interface FetchTestimonialsParams {
 	minRating?: number;
 }
 
+// ── In-memory cache ───────────────────────────────────────────────────────
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const cache = new Map<
+	string,
+	{ data: PublicTestimonial[]; timestamp: number }
+>();
+
+function cacheKey(params: Required<FetchTestimonialsParams>): string {
+	return JSON.stringify(params);
+}
+
 class PublicTestimonialService {
 	async fetchPublic(
 		params: FetchTestimonialsParams = {},
 	): Promise<PublicTestimonial[]> {
-		const { skip = 0, limit = 5, rating, minRating = 5 } = params;
+		const { skip = 0, limit = 5, rating, minRating } = params;
+
+		const key = cacheKey({
+			skip,
+			limit,
+			rating: rating ?? -1,
+			minRating: minRating ?? -1,
+		});
+		const cached = cache.get(key);
+
+		if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
+			return cached.data;
+		}
 
 		const query = new URLSearchParams({
 			skip: String(skip),
@@ -61,7 +84,9 @@ class PublicTestimonialService {
 			);
 
 			if (res?.status === "success" && Array.isArray(res.data?.testimonials)) {
-				return res.data.testimonials;
+				const testimonials = res.data.testimonials;
+				cache.set(key, { data: testimonials, timestamp: Date.now() });
+				return testimonials;
 			}
 			return [];
 		} catch {

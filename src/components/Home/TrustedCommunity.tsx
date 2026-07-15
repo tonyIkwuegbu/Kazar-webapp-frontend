@@ -49,11 +49,9 @@ const TrustedCommunity: React.FC<TrustedCommunityProps> = ({
 
 	useEffect(() => {
 		let cancelled = false;
-		publicTestimonialService
-			.fetchPublic({ limit: 5, minRating: 5 })
-			.then((data) => {
-				if (!cancelled) setTestimonials(data);
-			});
+		publicTestimonialService.fetchPublic({ limit: 5 }).then((data) => {
+			if (!cancelled) setTestimonials(data);
+		});
 		return () => {
 			cancelled = true;
 		};
