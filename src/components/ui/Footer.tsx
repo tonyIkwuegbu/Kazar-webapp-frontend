@@ -149,6 +149,12 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 								>
 									Terms of Service
 								</Link>
+								<Link
+									href="/faq"
+									className="hover:text-primary transition-colors duration-300"
+								>
+									FAQ
+								</Link>
 							</div>
 							<div className="text-center sm:text-right">
 								<p>Made with ❤️ in Nigeria</p>
