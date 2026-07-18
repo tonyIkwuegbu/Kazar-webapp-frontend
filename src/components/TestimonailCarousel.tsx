@@ -37,7 +37,12 @@ function getAvatarColor(name: string): string {
 
 function Stars({ rating }: { rating: number }) {
 	return (
-		<div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
+		// ✅ role="img" so the aria-label is announced — div alone isn't sufficient
+		<div
+			role="img"
+			aria-label={`${rating} out of 5 stars`}
+			className="flex gap-0.5"
+		>
 			{Array.from({ length: 5 }, (_, i) => (
 				<svg
 					key={i}
@@ -45,7 +50,10 @@ function Stars({ rating }: { rating: number }) {
 					fill={i < rating ? "currentColor" : "none"}
 					stroke="currentColor"
 					strokeWidth={i < rating ? 0 : 1.5}
-					className={`w-4 h-4 ${i < rating ? "text-warning" : "text-bodydark1 dark:text-white/20"}`}
+					aria-hidden="true"
+					className={`w-4 h-4 ${
+						i < rating ? "text-warning" : "text-bodydark1 dark:text-white/20"
+					}`}
 				>
 					<path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.9l-5.2 2.61.99-5.79-4.21-4.1 5.82-.85L10 1.5z" />
 				</svg>
@@ -82,6 +90,7 @@ function Avatar({
 
 	return (
 		<div
+			aria-hidden="true"
 			className={`w-14 h-14 shrink-0 rounded-full ${color} flex items-center justify-center text-white font-bold text-lg border-2 border-meta-5/30`}
 		>
 			{initial}
@@ -112,6 +121,16 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 		};
 	}, [multi, paused, next]);
 
+	// ✅ Keyboard navigation
+	useEffect(() => {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "ArrowLeft") prev();
+			if (e.key === "ArrowRight") next();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [prev, next]);
+
 	const t = testimonials[active];
 
 	return (
@@ -126,8 +145,14 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 				className="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] bg-meta-5/5 dark:bg-meta-5/8 blur-3xl"
 			/>
 
-			<div className="relative rounded-3xl border border-bodydark1/30 dark:border-white/10 bg-white dark:bg-graydark shadow-6 dark:shadow-none overflow-hidden">
-				{/* Large decorative quote mark */}
+			{/* ✅ Carousel region with proper ARIA */}
+			<div
+				role="region"
+				aria-label="Customer testimonials"
+				aria-roledescription="carousel"
+				className="relative rounded-3xl border border-bodydark1/30 dark:border-white/10 bg-white dark:bg-graydark shadow-6 dark:shadow-none overflow-hidden"
+			>
+				{/* Decorative quote mark */}
 				<svg
 					viewBox="0 0 64 64"
 					aria-hidden="true"
@@ -137,9 +162,12 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 					<path d="M14 28c0-7.7 4.5-13.5 12-16l2 4.5c-5 2-7.5 5.5-7.5 10.5h7v15H14V28zm26 0c0-7.7 4.5-13.5 12-16l2 4.5c-5 2-7.5 5.5-7.5 10.5h7v15H40V28z" />
 				</svg>
 
-				{/* Testimonial content */}
+				{/* ✅ Slide with proper ARIA */}
 				<div
 					key={t.testimonialId}
+					role="group"
+					aria-roledescription="slide"
+					aria-label={`${active + 1} of ${count}`}
 					className="relative z-10 px-6 pt-10 pb-6 sm:px-10 sm:pt-12 md:px-14 md:pt-14"
 				>
 					<Stars rating={t.rating} />
@@ -148,7 +176,6 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 						&ldquo;{t.testimonialText}&rdquo;
 					</p>
 
-					{/* Person */}
 					<div className="mt-8 flex items-center gap-4">
 						<Avatar name={t.firstName} pictureUrl={t.profilePicture} />
 
@@ -158,12 +185,12 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 							</p>
 
 							<div className="mt-1 flex flex-wrap items-center gap-2">
-								{/* Badge level */}
 								<span className="inline-flex items-center gap-1 text-xs font-semibold text-meta-5">
 									<svg
 										viewBox="0 0 16 16"
 										fill="currentColor"
 										className="w-3.5 h-3.5"
+										aria-hidden="true"
 									>
 										<path d="M8 1l1.9 3.8 4.2.6-3 2.9.7 4.2L8 10.4l-3.8 2 .7-4.2-3-2.9 4.2-.6L8 1z" />
 									</svg>
@@ -171,46 +198,71 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 								</span>
 							</div>
 
-							<p className="mt-0.5 text-[11px] text-bodydark2/70 dark:text-bodydark/60">
+							{/* ✅ Contrast fix — removed /70 and /60 opacity */}
+							<p className="mt-0.5 text-[11px] text-bodydark2 dark:text-bodydark">
 								Verified Kazar user · Since {t.memberSinceYear}
 							</p>
 						</div>
 					</div>
 				</div>
 
-				{/* Controls row */}
+				{/* Controls */}
 				{multi && (
 					<div className="relative z-10 flex items-center justify-between px-6 sm:px-10 md:px-14 pb-8 pt-4 border-t border-bodydark1/10 dark:border-white/5">
-						{/* Dot indicators */}
-						<div className="flex items-center gap-2">
+						{/* ✅ Dot buttons — 44×44 touch target, aria-selected replaces aria-current */}
+						<div
+							className="flex items-center gap-1"
+							role="tablist"
+							aria-label="Testimonials"
+						>
 							{testimonials.map((item, i) => (
 								<button
 									key={item.testimonialId}
+									role="tab"
 									onClick={() => goTo(i)}
-									aria-label={`Show testimonial ${i + 1} of ${count}`}
-									aria-current={i === active}
-									className={`h-1.5 rounded-full transition-all duration-300 ${
-										i === active
-											? "w-7 bg-meta-5"
-											: "w-1.5 bg-bodydark1/40 dark:bg-white/15 hover:bg-meta-5/50"
-									}`}
-								/>
+									aria-label={`Go to testimonial ${i + 1} of ${count}`}
+									aria-selected={i === active}
+									className="flex items-center justify-center w-11 h-11"
+								>
+									<span
+										className={`block rounded-full transition-all duration-300 ${
+											i === active
+												? "w-7 h-1.5 bg-meta-5"
+												: "w-2 h-2 bg-bodydark1/40 dark:bg-white/15 hover:bg-meta-5/50"
+										}`}
+									/>
+								</button>
 							))}
 						</div>
 
-						{/* Prev / Next */}
+						{/* ✅ Prev/Next — 44×44 (w-11 h-11) */}
 						<div className="flex gap-2">
-							{[
-								{ label: "Previous", onClick: prev, path: "M10 3L5 8l5 5" },
-								{ label: "Next", onClick: next, path: "M6 3l5 5-5 5" },
-							].map(({ label, onClick, path }) => (
+							{(
+								[
+									{
+										label: "Previous testimonial",
+										onClick: prev,
+										path: "M10 3L5 8l5 5",
+									},
+									{
+										label: "Next testimonial",
+										onClick: next,
+										path: "M6 3l5 5-5 5",
+									},
+								] as const
+							).map(({ label, onClick, path }) => (
 								<button
 									key={label}
 									onClick={onClick}
-									aria-label={`${label} testimonial`}
-									className="w-8 h-8 rounded-full flex items-center justify-center border border-bodydark1/40 dark:border-white/15 text-bodydark2 dark:text-bodydark hover:border-meta-5 hover:text-meta-5 transition-colors duration-200"
+									aria-label={label}
+									className="w-11 h-11 rounded-full flex items-center justify-center border border-bodydark1/40 dark:border-white/15 text-bodydark2 dark:text-bodydark hover:border-meta-5 hover:text-meta-5 transition-colors duration-200"
 								>
-									<svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
+									<svg
+										viewBox="0 0 16 16"
+										fill="none"
+										className="w-3.5 h-3.5"
+										aria-hidden="true"
+									>
 										<path
 											d={path}
 											stroke="currentColor"
@@ -226,29 +278,28 @@ export default function TestimonialCarousel({ testimonials }: Props) {
 				)}
 			</div>
 
-			{/* Progress bar at bottom */}
+			{/* Progress bar */}
 			{multi && !paused && (
-				<div className="mt-3 h-0.5 rounded-full bg-bodydark1/20 dark:bg-white/10 overflow-hidden">
+				<div
+					aria-hidden="true"
+					className="mt-3 h-0.5 rounded-full bg-bodydark1/20 dark:bg-white/10 overflow-hidden"
+				>
 					<div
 						key={`${active}-progress`}
 						className="h-full bg-meta-5 rounded-full"
 						style={{
-							animation: `progress ${AUTO_ROTATE_MS}ms linear forwards`,
+							animation: `kazar-progress ${AUTO_ROTATE_MS}ms linear forwards`,
 						}}
 					/>
 				</div>
 			)}
 
-			<style jsx>{`
-				@keyframes progress {
-					from {
-						width: 0%;
-					}
-					to {
-						width: 100%;
-					}
-				}
-			`}</style>
+			<style>{`
+        @keyframes kazar-progress {
+          from { width: 0%; }
+          to   { width: 100%; }
+        }
+      `}</style>
 		</div>
 	);
 }

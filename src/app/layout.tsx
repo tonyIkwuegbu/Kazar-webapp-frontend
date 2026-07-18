@@ -29,20 +29,18 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
 	width: "device-width",
 	initialScale: 1,
-	maximumScale: 1,
 	themeColor: "#1E90FF",
 };
 
 export default function RootLayout({
 	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html
 			lang="en"
 			data-scroll-behavior="smooth"
 			className={`${sora.variable}`}
+			suppressHydrationWarning
 		>
 			<head>
 				<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -60,7 +58,7 @@ export default function RootLayout({
 				/>
 				<meta name="format-detection" content="telephone=no" />
 			</head>
-			<body className="font-sora antialiased">
+			<body className="font-sora antialiased" suppressHydrationWarning>
 				<ClientProviders>{children}</ClientProviders>
 			</body>
 		</html>
