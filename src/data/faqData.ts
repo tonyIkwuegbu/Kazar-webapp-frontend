@@ -436,7 +436,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
 			{
 				question: "How do I contact Kazar support?",
 				answer:
-					"You can reach us through: In-app support tickets — raise a ticket directly from your account; Email — support@kazar.com; Instagram DM — @kazarescrow; Live Chat — available on the web app during business hours.",
+					"You can reach us through: In-app support tickets — raise a ticket directly from your account; Email — support@kazar.africa;",
 			},
 			{
 				question: "What information should I include when contacting support?",
