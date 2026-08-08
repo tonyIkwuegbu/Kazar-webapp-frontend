@@ -10,6 +10,9 @@ const TRUST_STATS = [
 	{ value: "2 mins", label: "Deal creation" },
 ];
 
+// Point everything to the marketing site until the mobile apps ship
+const DOWNLOAD_URL = "https://kazar.africa";
+
 const HeroArea: React.FC = () => {
 	return (
 		<section className="relative min-h-[calc(100dvh-80px)] pt-20 md:pt-10 lg:pt-0 flex items-center pb-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/60 to-white dark:from-graydark dark:via-[#1a2535] dark:to-graydark">
@@ -83,6 +86,79 @@ const HeroArea: React.FC = () => {
 									How It Works
 								</Button>
 							</Link>
+						</div>
+
+						{/* App download links */}
+						<div className="mt-8 flex flex-col gap-5">
+							<div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+								<a
+									href={DOWNLOAD_URL}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Download on the App Store"
+									className="transition-transform duration-200 hover:scale-105"
+								>
+									<Image
+										src="/appstore.png"
+										alt="Download on the App Store"
+										width={140}
+										height={42}
+										className="h-[42px] w-auto"
+									/>
+								</a>
+								<a
+									href={DOWNLOAD_URL}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Get it on Google Play"
+									className="transition-transform duration-200 hover:scale-105"
+								>
+									<Image
+										src="/googleplay.png"
+										alt="Get it on Google Play"
+										width={140}
+										height={42}
+										className="h-[42px] w-auto"
+									/>
+								</a>
+
+								<span className="hidden sm:block h-8 w-px bg-bodydark1/40 dark:bg-bodydark/20" />
+
+								<a
+									href={DOWNLOAD_URL}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-sm sm:text-base font-semibold text-graydark dark:text-white underline decoration-meta-5 decoration-2 underline-offset-4 transition-colors hover:text-meta-5"
+								>
+									Open Web App
+								</a>
+							</div>
+
+							{/* QR code — mobile access */}
+							<a
+								href={DOWNLOAD_URL}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="group flex items-center gap-4 self-center lg:self-start rounded-2xl border border-bodydark1/40 bg-white/60 dark:border-bodydark/10 dark:bg-white/5 p-3 pr-6 transition-colors hover:border-meta-5/40"
+							>
+								<div className="rounded-xl bg-white p-2 shadow-sm">
+									<Image
+										src="/qr.png"
+										alt="Scan the QR code to open Kazar on mobile"
+										width={72}
+										height={72}
+										className="h-16 w-16 sm:h-[72px] sm:w-[72px]"
+									/>
+								</div>
+								<div className="text-left">
+									<div className="text-[11px] font-bold uppercase tracking-wide text-meta-5">
+										Mobile Access
+									</div>
+									<div className="mt-1 text-sm sm:text-base font-semibold text-graydark dark:text-white">
+										Scan to open on mobile
+									</div>
+								</div>
+							</a>
 						</div>
 
 						{/* Trust Stats */}
