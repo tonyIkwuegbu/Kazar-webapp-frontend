@@ -1,4 +1,4 @@
-import LogoIcon from "./logo-icon.svg";
+import LogoIcon from "./logo-icon.png";
 import LogoImage from "./logo-image.png";
 import Pattern1 from "./pattern1.png";
 import Pattern2 from "./pattern2.png";
