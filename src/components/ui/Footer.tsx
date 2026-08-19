@@ -156,9 +156,6 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 									FAQ
 								</Link>
 							</div>
-							<div className="text-center sm:text-right">
-								<p>Made with ❤️ in Nigeria</p>
-							</div>
 						</div>
 					</div>
 				</div>
