@@ -116,7 +116,7 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 										}
 
 										return (
-											<a
+											<Link
 												key={social.label}
 												href={social.href}
 												target="_blank"
@@ -125,7 +125,7 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 												className={`${sharedClasses} ${social.hoverColor} hover:shadow-4 transform hover:scale-105`}
 											>
 												<Icon className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 group-hover:scale-110 transition-transform duration-300" />
-											</a>
+											</Link>
 										);
 									})}
 								</div>
@@ -154,6 +154,12 @@ const Footer: React.FC<FooterProps> = ({ className = "" }) => {
 									className="hover:text-primary transition-colors duration-300"
 								>
 									FAQ
+								</Link>
+								<Link
+									href="mailto:hello@kazar.africa"
+									className="hover:text-primary transition-colors duration-300"
+								>
+									hello@kazar.africa
 								</Link>
 							</div>
 						</div>
