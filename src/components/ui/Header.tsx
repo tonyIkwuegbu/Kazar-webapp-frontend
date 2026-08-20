@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LogoImage } from "@/assets";
+import { LogoIcon, LogoImage } from "@/assets";
 import DarkModeButton from "../elements/DarkModeButton";
 
 const NAV_LINKS = [
@@ -72,11 +72,11 @@ const Header: React.FC = () => {
 						className="shrink-0 transition-opacity hover:opacity-80"
 					>
 						<Image
-							src={LogoImage}
+							src={LogoIcon}
 							alt="Kazar"
 							width={120}
 							height={36}
-							className="h-8 w-auto object-contain dark:brightness-0 dark:invert"
+							className="h-14 md:h-16 w-auto object-contain dark:brightness-0 dark:invert"
 							priority
 						/>
 					</Link>
