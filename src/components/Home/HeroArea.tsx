@@ -99,7 +99,7 @@ const HeroArea: React.FC = () => {
 									className="transition-transform duration-200 hover:scale-105"
 								>
 									<Image
-										src="/appstore.png"
+										src="/appstore.webp"
 										alt="Download on the App Store"
 										width={140}
 										height={42}
