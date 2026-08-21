@@ -15,7 +15,7 @@ const DOWNLOAD_URL = "https://kazar.africa";
 
 const HeroArea: React.FC = () => {
 	return (
-		<section className="relative min-h-[calc(100dvh-80px)] pt-20 md:pt-10 lg:pt-0 flex items-center pb-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/60 to-white dark:from-graydark dark:via-[#1a2535] dark:to-graydark">
+		<section className="relative min-h-[calc(100dvh-4rem)] pt-24 sm:pt-28 lg:pt-24 flex items-center pb-12 overflow-hidden bg-gradient-to-br from-white via-blue-50/60 to-white dark:from-graydark dark:via-[#1a2535] dark:to-graydark">
 			{/* Grid lines */}
 			<div
 				aria-hidden="true"
@@ -89,49 +89,55 @@ const HeroArea: React.FC = () => {
 						</div>
 
 						{/* App download links */}
-						<div className="mt-8 flex flex-col gap-5">
-							<div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
-								<a
-									href={DOWNLOAD_URL}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="Download on the App Store"
-									className="transition-transform duration-200 hover:scale-105"
-								>
-									<Image
-										src="/appstore.webp"
-										alt="Download on the App Store"
-										width={140}
-										height={42}
-										className="h-[42px] w-auto"
-									/>
-								</a>
-								<a
-									href={DOWNLOAD_URL}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="Get it on Google Play"
-									className="transition-transform duration-200 hover:scale-105"
-								>
-									<Image
-										src="/googleplay.png"
-										alt="Get it on Google Play"
-										width={140}
-										height={42}
-										className="h-[42px] w-auto"
-									/>
-								</a>
+						<div className="mt-8 flex flex-col gap-4">
+							{/* Badges + Open Web App: stacked on sm/md, one line on lg */}
+							<div className="flex flex-col lg:flex-row lg:items-center gap-4">
+								<div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4">
+									<a
+										href={DOWNLOAD_URL}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="Download on the App Store"
+										className="flex h-[48px] w-[160px] sm:h-[52px] sm:w-[174px] md:h-[56px] md:w-[188px] lg:h-[58px] lg:w-[194px] items-center justify-center transition-transform duration-200 hover:scale-105 flex-shrink-0"
+									>
+										<Image
+											src="/appstore.png"
+											alt="Download on the App Store"
+											width={194}
+											height={58}
+											className="h-full w-full object-contain"
+										/>
+									</a>
+									<a
+										href={DOWNLOAD_URL}
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="Get it on Google Play"
+										className="flex h-[48px] w-[160px] sm:h-[52px] sm:w-[174px] md:h-[56px] md:w-[188px] lg:h-[58px] lg:w-[194px] items-center justify-center transition-transform duration-200 hover:scale-105 flex-shrink-0"
+									>
+										<Image
+											src="/googleplay.png"
+											alt="Get it on Google Play"
+											width={194}
+											height={58}
+											className="h-full w-full object-contain"
+										/>
+									</a>
+								</div>
 
-								<span className="hidden sm:block h-8 w-px bg-bodydark1/40 dark:bg-bodydark/20" />
+								{/* Divider - only shown when inline (lg) */}
+								<span className="hidden lg:block h-8 w-px bg-bodydark1/40 dark:bg-bodydark/20" />
 
-								<a
-									href={DOWNLOAD_URL}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-sm sm:text-base font-semibold text-graydark dark:text-white underline decoration-meta-5 decoration-2 underline-offset-4 transition-colors hover:text-meta-5"
-								>
-									Open Web App
-								</a>
+								<div className="flex justify-center lg:justify-start">
+									<a
+										href={DOWNLOAD_URL}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-sm sm:text-base font-semibold text-graydark dark:text-white underline decoration-meta-5 decoration-2 underline-offset-4 transition-colors hover:text-meta-5"
+									>
+										Open Web App
+									</a>
+								</div>
 							</div>
 
 							{/* QR code — mobile access */}
